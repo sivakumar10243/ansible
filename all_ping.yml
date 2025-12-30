@@ -1,12 +1,8 @@
-- name: Universal Ping Test
+---
+- name: Universal connectivity test
   hosts: all
-  gather_facts: yes
+  gather_facts: no
 
   tasks:
-    - name: Ping Linux hosts
-      ansible.builtin.ping:
-      when: ansible_os_family != "Windows"
-
-    - name: Ping Windows hosts
-      win_ping:
-      when: ansible_os_family == "Windows"
+    - name: Test remote connection
+      raw: echo "Host is reachable"
