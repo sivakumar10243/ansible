@@ -1,0 +1,5 @@
+- name: Windows Ping Test
+  hosts: windows
+  gather_facts: no
+  tasks:
+    - win_ping:
