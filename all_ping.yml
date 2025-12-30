@@ -1,7 +1,7 @@
 ---
-- name: Universal Ping Test (Linux + Windows)
+- name: Universal Ping Test
   hosts: all
-  gather_facts: yes
+  gather_facts: yes  # need facts to detect OS
 
   tasks:
     - name: Ping Linux hosts
