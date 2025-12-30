@@ -1,5 +1,12 @@
-- hosts: all
+- name: Universal Ping Test
+  hosts: all
   gather_facts: yes
+
   tasks:
-    - ansible.builtin.ping:
-    - win_ping:
+    - name: Ping Linux hosts
+      ansible.builtin.ping:
+      when: ansible_os_family != "Windows"
+
+    - name: Ping Windows hosts
+      win_ping:
+      when: ansible_os_family == "Windows"
