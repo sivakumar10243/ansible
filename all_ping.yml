@@ -1,7 +1,7 @@
 ---
 - name: Universal Ping Test
   hosts: all
-  gather_facts: yes  # need facts to detect OS
+  gather_facts: yes
 
   tasks:
     - name: Ping Linux hosts
