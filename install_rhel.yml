@@ -1,6 +1,6 @@
 ---
 - name: Bulk unattended install on RHEL hosts via AWX
-  hosts: rhel
+  hosts: all
   become: true
   gather_facts: true
 
