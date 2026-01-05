@@ -1,9 +1,0 @@
----
-- name: Create a directory using Ansible
-  hosts: all
-  tasks:
-    - name: Create a /tmp/demo_dir directory
-      file:
-        path: /tmp/demo_dir
-        state: directory
-        mode: '0755'
