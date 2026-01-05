@@ -1,11 +1,11 @@
 ---
-- name: Bulk unattended install on MacOS hosts via AWX
+- name: Bulk unattended install on MacOS hosts
   hosts: MacBook_Air
-  become: true
   gather_facts: true
+  # DO NOT use become: true
 
   tasks:
-    - name: Copy Mac installation script to host
+    - name: Copy Mac installation script
       copy:
         src: files/install_mac.sh
         dest: /tmp/install_mac.sh
@@ -13,5 +13,3 @@
 
     - name: Run Mac installation script
       command: /tmp/install_mac.sh
-      args:
-        creates: /opt/mac_system_upgraded
