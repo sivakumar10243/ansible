@@ -24,6 +24,7 @@ echo "Running brew upgrade..."
 brew upgrade
 
 # Mark completion
+mkdir -p /opt
 touch /opt/mac_system_upgraded
 
 echo "MacOS Installation finished: $(date)"
