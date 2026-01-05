@@ -1,6 +1,6 @@
 ---
 - name: Bulk unattended install on MacOS hosts via AWX
-  hosts: mac
+  hosts: all
   become: true
   gather_facts: true
 
