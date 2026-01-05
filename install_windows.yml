@@ -1,6 +1,6 @@
 ---
 - name: Bulk unattended install on Windows hosts via AWX
-  hosts: windows
+  hosts: all
   gather_facts: false
 
   tasks:
