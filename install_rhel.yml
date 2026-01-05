@@ -1,0 +1,17 @@
+---
+- name: Bulk unattended install on RHEL hosts via AWX
+  hosts: rhel
+  become: true
+  gather_facts: true
+
+  tasks:
+    - name: Copy install script from repo to target host
+      copy:
+        src: files/install_rhel.sh
+        dest: /tmp/install_rhel.sh
+        mode: '0755'
+
+    - name: Run installation script on target host
+      command: /tmp/install_rhel.sh
+      args:
+        creates: /opt/rhel_system_upgraded
