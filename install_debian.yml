@@ -1,0 +1,17 @@
+---
+- name: Bulk unattended install on Debian hosts via AWX
+  hosts: debian
+  become: true
+  gather_facts: true
+
+  tasks:
+    - name: Copy install script from repo to target host
+      copy:
+        src: files/install.sh
+        dest: /tmp/install.sh
+        mode: '0755'
+
+    - name: Run installation script on target host
+      command: /tmp/install.sh
+      args:
+        creates: /opt/system_upgraded
