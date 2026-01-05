@@ -1,8 +1,0 @@
----
-- name: Create a demo file using Ansible
-  hosts: all
-  tasks:
-    - name: Create a demo.txt file
-      copy:
-        dest: /tmp/demo.txt
-        content: "This is a demo file created by Ansible.\n"
