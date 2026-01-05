@@ -1,6 +1,6 @@
 ---
 - name: Bulk unattended install on Debian hosts via AWX
-  hosts: debian
+  hosts: all
   become: true
   gather_facts: true
 
