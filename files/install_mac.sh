@@ -1,18 +1,15 @@
 #!/bin/bash
 set -e
 
+# Ensure brew is in PATH
+export PATH="/opt/homebrew/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin"
+
 LOG_FILE="$HOME/unattended_install_mac.log"
 exec > >(tee -a "$LOG_FILE") 2>&1
 
 echo "=============================="
 echo "MacOS Installation started: $(date)"
 echo "=============================="
-
-# Fix Homebrew ownership
-if [ -d "/opt/homebrew" ]; then
-    echo "Fixing Homebrew directory permissions..."
-    sudo chown -R $(whoami) /opt/homebrew
-fi
 
 # Install Homebrew if missing
 if ! command -v brew >/dev/null 2>&1; then
