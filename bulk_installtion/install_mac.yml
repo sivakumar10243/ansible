@@ -1,0 +1,27 @@
+---
+- name: Bulk unattended update & upgrade on MacOS hosts
+  hosts: MacBook_Air
+  gather_facts: true
+  # DO NOT use become: true on macOS
+
+  vars:
+    log_file: "{{ ansible_env.HOME }}/unattended_install_mac.log"
+    marker_file: "{{ ansible_env.HOME }}/mac_system_upgraded"
+
+  tasks:
+    - name: Copy Mac update script
+      copy:
+        src: bulk_installtion/files/install_mac.sh
+        dest: /tmp/install_mac.sh
+        mode: '0755'
+
+    - name: Run update & upgrade script and log output
+      shell: |
+        echo "==============================" >> {{ log_file }}
+        echo "MacOS Update started: $(date)" >> {{ log_file }}
+        echo "==============================" >> {{ log_file }}
+        /tmp/install_mac.sh >> {{ log_file }} 2>&1
+        echo "MacOS Update finished: $(date)" >> {{ log_file }}
+        touch {{ marker_file }}
+      args:
+        creates: "{{ marker_file }}"

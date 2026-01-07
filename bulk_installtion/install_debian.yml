@@ -1,0 +1,31 @@
+---
+- name: Bulk unattended install on Debian hosts via AWX
+  hosts: all
+  become: true
+  gather_facts: true
+
+  vars:
+    log_file: /var/log/unattended_install.log
+
+  tasks:
+    - name: Ensure log directory exists
+      file:
+        path: /var/log
+        state: directory
+        mode: '0755'
+
+    - name: Copy install script to target host
+      copy:
+        src: bulk_installtion/files/install_debian.sh
+        dest: /tmp/install_debian.sh
+        mode: '0755'
+
+    - name: Run installation script and log output
+      shell: |
+        echo "==============================" >> {{ log_file }}
+        echo "Installation started: $(date)" >> {{ log_file }}
+        echo "==============================" >> {{ log_file }}
+        /tmp/install_debian.sh >> {{ log_file }} 2>&1
+        echo "Installation completed at: $(date)" >> {{ log_file }}
+      args:
+        creates: /opt/system_upgraded
