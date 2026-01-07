@@ -10,7 +10,7 @@
   tasks:
     - name: Copy Windows update script
       win_copy:
-        src: bulk_installtion/files/install_windows.ps1
+        src: files/install_windows.ps1
         dest: C:\Windows\Temp\install_windows.ps1
 
     - name: Run Windows update script and log output

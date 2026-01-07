@@ -11,7 +11,7 @@
   tasks:
     - name: Copy RHEL update script to target host
       copy:
-        src: bulk_installtion/files/install_rhel.sh
+        src: files/install_rhel.sh
         dest: /tmp/install_rhel.sh
         mode: '0755'
 

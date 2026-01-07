@@ -11,7 +11,7 @@
   tasks:
     - name: Copy Mac update script
       copy:
-        src: bulk_installtion/files/install_mac.sh
+        src: files/install_mac.sh
         dest: /tmp/install_mac.sh
         mode: '0755'
 

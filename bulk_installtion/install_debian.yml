@@ -16,7 +16,7 @@
 
     - name: Copy install script to target host
       copy:
-        src: bulk_installtion/files/install_debian.sh
+        src: files/install_debian.sh
         dest: /tmp/install_debian.sh
         mode: '0755'
 
