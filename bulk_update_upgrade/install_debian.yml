@@ -25,9 +25,13 @@
       shell: |
         unset DISPLAY
         chmod +x /tmp/install_debian.sh
-        /tmp/install_debian.sh
-      args:
-        creates: "{{ marker_file }}"
+        if [ ! -f "{{ marker_file }}" ]; then
+            echo "Running install_debian.sh..."
+            /tmp/install_debian.sh
+            touch "{{ marker_file }}"
+        else
+            echo "Script skipped, marker file exists."
+        fi
       register: script_output
 
     - name: Write script output to log with markers
