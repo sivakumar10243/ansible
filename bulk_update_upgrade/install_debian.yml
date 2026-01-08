@@ -6,6 +6,7 @@
 
   vars:
     log_file: /var/log/unattended_install.log
+    marker_file: /opt/system_upgraded
 
   tasks:
     - name: Ensure log directory exists
@@ -20,14 +21,24 @@
         dest: /tmp/install_debian.sh
         mode: '0755'
 
-    - name: Run installation script and log output
+    - name: Run installation script and capture output
       shell: |
-        echo "==============================" >> {{ log_file }}
-        echo "Installation started: $(date)" >> {{ log_file }}
-        echo "==============================" >> {{ log_file }}
         unset DISPLAY
         chmod +x /tmp/install_debian.sh
-        /tmp/install_debian.sh >> {{ log_file }} 2>&1
-        echo "Installation completed at: $(date)" >> {{ log_file }}
+        /tmp/install_debian.sh
       args:
-        creates: /opt/system_upgraded
+        creates: "{{ marker_file }}"
+      register: script_output
+
+    - name: Write script output to log with markers
+      copy:
+        content: |
+          ==============================
+          Installation started: {{ ansible_date_time.date }} {{ ansible_date_time.time }}
+          ==============================
+          {{ script_output.stdout_lines | join('\n') }}
+          Installation completed: {{ ansible_date_time.date }} {{ ansible_date_time.time }}
+        dest: "{{ log_file }}"
+        owner: root
+        group: root
+        mode: '0644'
