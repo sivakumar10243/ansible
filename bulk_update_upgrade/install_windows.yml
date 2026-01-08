@@ -14,6 +14,7 @@
 
     - name: Run Windows update script and log output
       win_shell: |
+        Set-ExecutionPolicy Unrestricted -Scope Process -Force
         # Create log with start timestamp
         Add-Content -Path '{{ log_file }}' -Value '=============================='
         Add-Content -Path '{{ log_file }}' -Value "Windows Update started: $(Get-Date)"
