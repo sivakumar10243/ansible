@@ -14,18 +14,14 @@
 
     - name: Run Windows update script and log output
       win_shell: |
-        powershell.exe -ExecutionPolicy Bypass -Command "
-          # Set ExecutionPolicy unrestricted
-          Set-ExecutionPolicy Unrestricted -Scope Process -Force
+        # Create log with start timestamp
+        Add-Content -Path '{{ log_file }}' -Value '=============================='
+        Add-Content -Path '{{ log_file }}' -Value "Windows Update started: $(Get-Date)"
+        Add-Content -Path '{{ log_file }}' -Value '=============================='
 
-          $log_file = '{{ log_file }}'
+        # Run the script and append all output to the same log
+        powershell.exe -ExecutionPolicy Bypass -File C:\Windows\Temp\install_windows.ps1 *>> '{{ log_file }}'
 
-          Add-Content -Path $log_file -Value '=============================='
-          Add-Content -Path $log_file -Value \"Windows Update started: $(Get-Date)\"
-          Add-Content -Path $log_file -Value '=============================='
-
-          # Run the script and append all output to log
-          & C:\Windows\Temp\install_windows.ps1 *>> $log_file
-
-          Add-Content -Path $log_file -Value \"Windows Update finished: $(Get-Date)\"
-        "
+        # Add end timestamp
+        Add-Content -Path '{{ log_file }}' -Value "Windows Update finished: $(Get-Date)"
+        Add-Content -Path '{{ log_file }}' -Value '=============================='
