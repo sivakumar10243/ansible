@@ -6,7 +6,6 @@
 
   vars:
     log_file: "{{ ansible_env.HOME }}/unattended_install_mac.log"
-    marker_file: "{{ ansible_env.HOME }}/mac_system_upgraded"
 
   tasks:
     - name: Copy Mac update script
@@ -17,11 +16,10 @@
 
     - name: Run update & upgrade script and log output
       shell: |
-        echo "==============================" >> {{ log_file }}
-        echo "MacOS Update started: $(date)" >> {{ log_file }}
-        echo "==============================" >> {{ log_file }}
-        /tmp/install_mac.sh >> {{ log_file }} 2>&1
-        echo "MacOS Update finished: $(date)" >> {{ log_file }}
-        touch {{ marker_file }}
-      args:
-        creates: "{{ marker_file }}"
+        {
+          echo "=============================="
+          echo "MacOS Update started: $(date)"
+          echo "=============================="
+          /tmp/install_mac.sh
+          echo "MacOS Update finished: $(date)"
+        } >> {{ log_file }} 2>&1
