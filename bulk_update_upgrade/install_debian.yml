@@ -22,8 +22,6 @@
 
     - name: Run installation script and log output
       shell: |
-        unset DISPLAY
-        chmod +x /tmp/install_debian.sh
         echo "==============================" >> {{ log_file }}
         echo "Installation started: $(date)" >> {{ log_file }}
         echo "==============================" >> {{ log_file }}
