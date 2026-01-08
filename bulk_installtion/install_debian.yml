@@ -24,14 +24,14 @@
       shell: |
         unset DISPLAY
         chmod +x /tmp/install_debian.sh
-        # ensure log file exists
-        touch {{ log_file }}
-        chmod 644 {{ log_file }}
-        echo "==============================" >> {{ log_file }}
-        echo "Installation started: $(date)" >> {{ log_file }}
-        echo "==============================" >> {{ log_file }}
-        /tmp/install_debian.sh >> {{ log_file }} 2>&1
-        echo "Installation completed at: $(date)" >> {{ log_file }}
+        # Redirect all output of this shell block to the log
+        exec >> /var/log/unattended_install.log 2>&1
+        echo "=============================="
+        echo "Installation started: $(date)"
+        echo "=============================="
+        /tmp/install_debian.sh
+        echo "Installation completed at: $(date)"
       args:
         creates: /opt/system_upgraded
+
 
