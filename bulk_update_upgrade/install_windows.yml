@@ -16,7 +16,6 @@
       win_shell: |
         powershell.exe -ExecutionPolicy Bypass -Command "
           # Set ExecutionPolicy unrestricted
-          Set-ExecutionPolicy Unrestricted -Scope Process -Force
 
           Add-Content -Path '{{ log_file }}' -Value '=============================='
           Add-Content -Path '{{ log_file }}' -Value 'Windows Update started: ' + (Get-Date)
