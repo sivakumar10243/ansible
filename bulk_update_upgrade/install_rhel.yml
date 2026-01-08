@@ -6,7 +6,6 @@
 
   vars:
     log_file: /var/log/unattended_install_rhel.log
-    marker_file: /opt/rhel_system_upgraded
 
   tasks:
     - name: Copy RHEL update script to target host
@@ -17,11 +16,12 @@
 
     - name: Run RHEL update script and log output
       shell: |
-        echo "==============================" >> {{ log_file }}
-        echo "RHEL Update started: $(date)" >> {{ log_file }}
-        echo "==============================" >> {{ log_file }}
-        /tmp/install_rhel.sh >> {{ log_file }} 2>&1
-        echo "RHEL Update finished: $(date)" >> {{ log_file }}
-        touch {{ marker_file }}
-      args:
-        creates: "{{ marker_file }}"
+        unset DISPLAY
+        chmod +x /tmp/install_rhel.sh
+        {
+          echo "=============================="
+          echo "RHEL Update started: $(date)"
+          echo "=============================="
+          /tmp/install_rhel.sh
+          echo "RHEL Update finished: $(date)"
+        } >> {{ log_file }} 2>&1
