@@ -24,6 +24,9 @@
       shell: |
         unset DISPLAY
         chmod +x /tmp/install_debian.sh
+        # ensure log file exists
+        touch {{ log_file }}
+        chmod 644 {{ log_file }}
         echo "==============================" >> {{ log_file }}
         echo "Installation started: $(date)" >> {{ log_file }}
         echo "==============================" >> {{ log_file }}
@@ -31,3 +34,4 @@
         echo "Installation completed at: $(date)" >> {{ log_file }}
       args:
         creates: /opt/system_upgraded
+
