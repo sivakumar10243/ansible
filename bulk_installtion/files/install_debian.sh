@@ -32,7 +32,7 @@ meshDL='https://k3d.faveodemo.com/meshagents?id=2UWY3pA$$JjTYUbmOp0tJuWfpzq@wuTd
 
 agentDL='https://agentsw.faveodemo.com/api/agent/download/?platform=linux&architecture=amd64'
 apiURL='https://agentsw.faveodemo.com'
-token='KEmZbpNl7u1C89HQuS1wwhafxhTJ8ej1HnOnehRvf7h2sVzpAYk4sEcSCpfm'
+token='oQpFB1wgm50SqARBFxuQMe05qlgiG2kVimvwxgBlcsV8EnzhEHrUbIZ80c7s'
 clientID='1'
 siteID='1'
 assetTypeId=34
